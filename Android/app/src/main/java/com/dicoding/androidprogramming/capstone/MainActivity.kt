@@ -57,7 +57,12 @@ class MainActivity : AppCompatActivity() {
 
             var max = getMax(outputFeature0.floatArray)
 
-            text_view.setText(labels[max])
+            val intent = Intent(this@MainActivity, DetectedActivity::class.java)
+            intent.putExtra(DetectedActivity.EXTRA_INDEX, max)
+            intent.putExtra(DetectedActivity.EXTRA_CLASS, labels[max])
+            startActivity(intent)
+
+            //text_view.setText(labels[max])
 
             model.close()
         })
