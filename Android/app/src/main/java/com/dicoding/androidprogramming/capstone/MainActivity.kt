@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.MediaStore
 import android.widget.ImageView
+import com.bumptech.glide.Glide
 import com.dicoding.androidprogramming.capstone.databinding.ActivityMainBinding
 import com.dicoding.androidprogramming.capstone.ml.ConvertedModel
 import org.tensorflow.lite.DataType
@@ -59,15 +60,13 @@ class MainActivity : AppCompatActivity() {
             intent.putExtra(DetectedActivity.EXTRA_CONFIDENCE, confidence)
             startActivity(intent)
 
-            //text_view.setText(labels[max])
-
             model.close()
         }
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        imgView.setImageURI(data?.data)
+        Glide.with(this).load(data?.data).into(imgView)
 
         val uri: Uri? = data?.data
 
